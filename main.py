@@ -10,27 +10,24 @@ def multiplicar(a, b):
 
 
 def interpretar_mensagem(msg: str):
-    """Tenta entender a operação e dois números na mensagem.
-    Suporta formas simples de adição e multiplicação em português.
-    """
 
     msg = msg.lower().strip()
 
-    # 1. procura padrão "quanto é X + Y" ou "x + y"
+   
     add_match = re.search(r"(-?\d+)\s*\+\s*(-?\d+)", msg)
     if add_match:
         a = int(add_match.group(1))
         b = int(add_match.group(2))
         return "somar", a, b
 
-    # 2. procura padrão "multiplique X por Y" ou "X vezes Y"
+ 
     mul_match = re.search(r"(-?\d+)\s*(?:por|x|vezes|\*)\s*(-?\d+)", msg)
     if mul_match:
         a = int(mul_match.group(1))
         b = int(mul_match.group(2))
         return "multiplicar", a, b
 
-    # final: se reconhece "multiplicar" ou "somar" com números separados por espaço
+   
     simple = re.search(r"(somar|multiplicar)\s+(-?\d+)\s+.*?(-?\d+)", msg)
     if simple:
         op = simple.group(1)
